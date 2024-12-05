@@ -1,0 +1,49 @@
+# -*- coding: utf-8 -*-
+"""
+Advent of Code 2024 Day 1
+
+@author: follosoraptor
+"""
+
+# Functions
+def sort(unsorted_list:list):
+    return sorted(unsorted_list)
+
+def main():
+    with open("input.txt", "r") as f:
+        input = f.read()
+        print(input)
+        
+    input_list:list = input.split()
+    total_input_length = len(input_list)
+    
+    first_list:list = []
+    second_list:list = []
+    list_difference = []
+    
+    # Splits the two lists accordingly
+    # "even" (0,2,4,6,8...) are in first list
+    # "odd" (1,3,5,7...) are in second list
+    for x in range(total_input_length):
+        if x % 2 == 0:
+            first_list.append(input_list[x])
+        else:
+            second_list.append(input_list[x])
+    
+    sorted_first_list = sort(first_list)
+    sorted_second_list = sort(second_list)
+    
+    for x in range(len(first_list)):
+        if sorted_first_list[x] > sorted_second_list[x]:
+            distance:int = int(sorted_first_list[x]) - int(sorted_second_list[x])
+            list_difference.append(distance)
+        elif sorted_second_list[x] > sorted_first_list[x]:
+            distance:int = int(sorted_second_list[x]) - int(sorted_first_list[x])
+            list_difference.append(distance)
+            
+    answer = sum(list_difference)
+    print(answer)
+
+# Main Program
+if __name__ == "__main__":
+    main()
